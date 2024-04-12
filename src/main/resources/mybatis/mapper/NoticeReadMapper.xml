@@ -16,4 +16,15 @@
         LIMIT #{startIdx},10;
     </select>
 
+    <select id="findById" parameterType="long" resultType="com.example.performancecache.dto.Notice">
+        SELECT *
+        FROM notice
+        WHERE id=#{id}
+    </select>
+
+    <select id="findNoticesByDates" resultType="com.example.performancecache.dto.Notice">
+        SELECT * FROM study_db.notice
+        WHERE createDate BETWEEN #{startDate} AND #{endDate}
+    </select>
+
 </mapper>

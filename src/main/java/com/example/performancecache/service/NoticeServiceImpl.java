@@ -3,6 +3,8 @@ package com.example.performancecache.service;
 import com.example.performancecache.dto.Notice;
 import com.example.performancecache.mapper.NoticeReadMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,4 +39,11 @@ public class NoticeServiceImpl implements NoticeService{
     public List<Notice> findNoticesByDates(LocalDateTime startDate, LocalDateTime endDate) {
         return noticeReadMapper.findNoticesByDates(startDate, endDate);
     }
+
+    @Override
+    @Caching(evict = {
+        @CacheEvict(value = "NoticeReadMapper.findAll", allEntries = true),
+        @CacheEvict(value = "findById", allEntries = true)
+    })
+    public void cacheevict() {System.out.println("@CacheEvict");}
 }

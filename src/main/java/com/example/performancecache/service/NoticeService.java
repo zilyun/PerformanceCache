@@ -14,4 +14,5 @@ public interface NoticeService {
 
     List<Notice> findNoticesByDates(LocalDateTime startDate, LocalDateTime endDate);
 
+    public void cacheevict();
 }

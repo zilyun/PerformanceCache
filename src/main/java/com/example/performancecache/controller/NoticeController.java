@@ -21,25 +21,25 @@ public class NoticeController {
     }
 
     @GetMapping("")
-    public ResponseEntity<Object> findAll() {
+    public List<Notice> findAll() {
         List<Notice> notices = noticeService.getAllNotices();
-        return new ResponseEntity<>(notices, HttpStatus.OK);
+        return notices;
     }
 
     @GetMapping("/{page}")
-    public ResponseEntity<Object> findByPage(HttpServletRequest request, @PathVariable("page") Integer page) {
+    public List<Notice> findByPage(HttpServletRequest request, @PathVariable("page") Integer page) {
         List<Notice> notices = noticeService.findByPage(request, page);
-        return new ResponseEntity<>(notices, HttpStatus.OK);
+        return notices;
     }
 
     @GetMapping("/dates")
-    public ResponseEntity<Object> findNoticesByDates(@RequestParam("startDate") String startDate,
+    public List<Notice> findNoticesByDates(@RequestParam("startDate") String startDate,
                                                      @RequestParam("endDate") String endDate) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         List<Notice> notices = noticeService.findNoticesByDates(
                 LocalDateTime.parse(startDate, formatter),
                 LocalDateTime.parse(endDate, formatter)
         );
-        return new ResponseEntity<>(notices, HttpStatus.OK);
+        return notices;
     }
 }
