@@ -24,6 +24,7 @@ public class EhcacheController {
         this.cacheManager = cacheManager;
     }
 
+    // http://localhost:8099/api/notices 응답 이후 이곳에서 해당 내용을 캐시로 저장하고 있다.
     @GetMapping("/ehcache")
     public Object findAll(){
         List<Map<String, List<String>>> result = cacheManager.getCacheNames().stream()
